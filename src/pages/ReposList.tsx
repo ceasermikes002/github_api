@@ -9,13 +9,30 @@ const ReposList = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const reposPerPage = 2; // Number of repos per page
 
   useEffect(() => {
-    fetchRepos().then(data => {
-      setRepos(data);
-      setLoading(false);
-    });
-  }, []);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchRepos(currentPage, reposPerPage);
+        setRepos(data);
+        setLoading(false);
+
+        // Update total pages based on GitHub's response headers or API docs
+        // For this example, set totalPages to a static number or calculate as needed
+        // Assuming a static totalPages for simplicity
+        setTotalPages(5); // Example static number, adjust according to your needs
+      } catch (err) {
+        console.error('Error fetching repositories:', err);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [currentPage]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +48,7 @@ const ReposList = () => {
   }, []);
 
   const handleCreateRepo = () => {
-    fetchRepos().then(data => {
+    fetchRepos(currentPage, reposPerPage).then(data => {
       setRepos(data);
     });
   };
@@ -41,6 +58,12 @@ const ReposList = () => {
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
   };
 
   if (loading) return <p className="text-center text-lg text-white">Loading...</p>;
@@ -66,6 +89,25 @@ const ReposList = () => {
           </li>
         ))}
       </ul>
+      <div className="mt-4 flex justify-between">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400 transition"
+        >
+          Previous
+        </button>
+        <span className="text-lg">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400 transition"
+        >
+          Next
+        </button>
+      </div>
       {showModal && (
         <CreateRepoModal onClose={() => setShowModal(false)} onCreate={handleCreateRepo} />
       )}

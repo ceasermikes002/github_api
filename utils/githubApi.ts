@@ -7,8 +7,13 @@ const api = axios.create({
   },
 });
 
-export const fetchRepos = async () => {
-  const response = await api.get('/user/repos');
+export const fetchRepos = async (page: number = 1, perPage: number = 2) => {
+  const response = await api.get(`/user/repos`, {
+    params: {
+      page,
+      per_page: perPage,
+    },
+  });
   return response.data;
 };
 

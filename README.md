@@ -1,50 +1,108 @@
-# React + TypeScript + Vite
+# GitHub Repository Portfolio Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This web application allows you to view, update, create, and delete GitHub repositories. Built using Vite, React, TypeScript, and Tailwind CSS, it provides an interactive interface to manage your GitHub repositories.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **View Repositories**: List all GitHub repositories with pagination.
+- **Repository Details**: View details of a specific repository, including languages used.
+- **Create Repository**: Add new repositories using a modal form.
+- **Update Repository**: Modify the details of existing repositories.
+- **Delete Repository**: Remove repositories with confirmation.
+- **Error Handling**: Includes error boundaries and a custom 404 page.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Build Tool**: Vite
+- **API**: GitHub REST API
+- **HTTP Client**: Axios
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Prerequisites
+
+- Node.js and npm installed
+- GitHub account with a personal access token
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Install Dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+### 3. Set Up Environment Variables
+
+Create a `.env` file in the root of your project and add the following variables:
+
+```env
+VITE_GITHUB_TOKEN=your_github_token
+VITE_GITHUB_USERNAME=your_github_username
+```
+
+Replace `your_github_token` and `your_github_username` with your actual GitHub token and username.
+
+### 4. Run the Development Server
+
+```bash
+npm run dev
+```
+
+Open your browser and navigate to `http://localhost:5173` to view the application.
+
+### 5. Build for Production
+
+```bash
+npm run build
+```
+
+The production build will be available in the `dist` directory.
+
+## Usage
+
+- **Home Page**: View a list of your GitHub repositories with pagination.
+- **Repository Details**: Click on a repository name to view its details, including languages used.
+- **Create Repository**: Click the "Create New Repository" button to open a modal for creating a new repository.
+- **Update Repository**: In the repository details view, click "Update Repository" to modify its details.
+- **Delete Repository**: In the repository details view, click "Delete Repository" to remove it.
+
+## Error Handling
+
+The application includes error boundaries to handle API errors gracefully and a custom 404 page for unmatched routes.
+
+## Contributing
+
+Contributions are welcome! Please submit a pull request or open an issue if you have suggestions or improvements.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions, please reach out to [your-email@example.com](mailto:your-email@example.com).
+
+```
+
+### Customizing the README
+
+1. **Project Description**: Update the overview and features sections to reflect the specific functionalities and purpose of your project.
+
+2. **Tech Stack**: Adjust the tech stack section if you use any additional libraries or tools.
+
+3. **Environment Variables**: Make sure the environment variables and setup instructions are accurate for your project.
+
+4. **Contact Information**: Replace the contact information with your own or your team's contact details.
+
+5. **License**: If you are using a different license, replace the license section accordingly.
+
+Feel free to modify the sections and content to better fit your project and team’s needs.
